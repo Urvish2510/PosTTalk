@@ -55,7 +55,7 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? "Creating" : "Updating"} a Memory
+          {!currentId ? "Creating" : "Updating"} a Memory
         </Typography>
         <TextField
           name="creator"
@@ -108,6 +108,7 @@ const Form = ({ currentId, setCurrentId }) => {
           color="primary"
           size="large"
           type="submit"
+          onClick={handleSubmit}
           fullWidth
         >
           Submit
