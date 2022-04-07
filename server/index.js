@@ -1,9 +1,12 @@
+import dotenv from "dotenv";
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 
 import postRoutes from "./routes/posts.js";
+
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -12,14 +15,12 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 
-const CONNECTION_URL =
-  "mongodb+srv://PosTTalK:HnZTK6qhm6xwCpB@posttalk.r94vg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const PORT = process.env.PORT || 1155;
+// const CONNECTION_URL = process.env.CONNECTION_URL;
 
 mongoose
-  .connect(CONNECTION_URL)
+  .connect(process.env.CONNECTION_URL)
   .then(() =>
-    app.listen(PORT, () =>
+    app.listen(1155, () =>
       console.log(`Server running on PORT http://localhost:1155`)
     )
   )
