@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -37,16 +36,16 @@ export const signup = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
-    // Check user exist
-    const existingUser = await User.findOne({ email });
-    if (existingUser)
-      return res.status(400).json({ message: "User already exist." });
-
     //Check password and confirmPassword equal or not
     if (password !== confirmPassword)
       return res
         .status(400)
         .json({ message: "Password and ConfirmPassword must be same!!!" });
+
+    // Check user exist
+    const existingUser = await User.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({ message: "User already exist." });
 
     //Hash the password then create newUser and store in the database with hashed Password.
     const hashedPassword = await bcrypt.hash(password, 12);
