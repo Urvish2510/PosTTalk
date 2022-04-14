@@ -11,7 +11,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    tags: "",
+    tags: [],
     selectedFile: "",
   });
   const post = useSelector((state) =>
@@ -29,12 +29,12 @@ const Form = ({ currentId, setCurrentId }) => {
     setPostData({
       title: "",
       message: "",
-      tags: "",
+      tags: [],
       selectedFile: "",
     });
   };
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
 
     if (currentId === 0) {
@@ -46,7 +46,7 @@ const Form = ({ currentId, setCurrentId }) => {
       );
       clear();
     }
-  };
+  }
 
   if (!user?.result?.name) {
     return (
@@ -82,6 +82,8 @@ const Form = ({ currentId, setCurrentId }) => {
           variant="outlined"
           label="Message"
           fullWidth
+          multiline
+          minRows={4}
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
@@ -111,8 +113,8 @@ const Form = ({ currentId, setCurrentId }) => {
           variant="contained"
           color="primary"
           size="large"
-          type="submit"
           onClick={handleSubmit}
+          type="submit"
           fullWidth
         >
           Submit
