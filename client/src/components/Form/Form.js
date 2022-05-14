@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
-import Filebase from "react-file-base64";
+import FileBase64 from 'react-file-base64';
 import { useDispatch, useSelector } from "react-redux";
 
 import useStyles from "./styles";
@@ -100,13 +100,13 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <div className={classes.fileInput}>
-          <Filebase
+          <FileBase64
             type="file"
             multiple={false}
             onDone={({ base64 }) =>
               setPostData({ ...postData, selectedFile: base64 })
             }
-          ></Filebase>
+          />
         </div>
         <Button
           className={classes.buttonSubmit}
