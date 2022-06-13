@@ -38,9 +38,17 @@ const Home = () => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
 
+  const searchPost = () => {
+    if(search.trim()){
+      // dispatch -> fetch search post
+    } else{
+      navigate("/");
+    }
+  }
+
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      //search post
+      searchPost();
     }
   };
 
@@ -85,6 +93,7 @@ const Home = () => {
                 label="Search Tags"
                 variant="outlined"
               />
+              <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
